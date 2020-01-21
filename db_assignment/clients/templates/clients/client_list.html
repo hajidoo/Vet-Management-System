@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block content %}
+<head><link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script></head>
+<style>
+    button.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ button.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+ table.pure-table{
+     border-radius: 5px;
+     font-size: 12px;
+     font-weight: normal;
+     border: none;
+     border-collapse: collapse;
+     width: 100%;
+     max-width: 100%;
+     white-space: nowrap;
+     background-color: white;
+ }
+ .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+.pure-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+}
+.pure-table tr:nth-child(even) {
+     background: #F8F8F8;
+}
+.pure-table thead th {
+     color: #ffffff;
+     background: #4FC3A1;
+}
+.pure-table td {
+     border-right: 1px solid #f8f8f8;
+     font-size: 12px;
+}
+.pure-table td, .pure-table th {
+     text-align: center;
+     padding: 8px;
+}
+@media (max-width: 767px) {
+.pure-table {
+     display: block;
+     width: 100%;
+}
+.table-wrapper:before{
+     content: "Scroll horizontally >";
+     display: block;
+     text-align: right;
+     font-size: 11px;
+     color: white;
+     padding: 0 0 10px;
+}
+.pure-table thead, .fl-table tbody, .pure-table thead th {
+     display: block;
+ }
+.pure-table thead th:last-child{
+     border-bottom: none;
+}
+.pure-table thead {
+     float: left;
+}
+.pure-table tbody {
+     width: auto;
+     position: relative;
+     overflow-x: auto;
+}
+.pure-table td, .pure-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+}
+.pure-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+}
+.pure-table tbody tr {
+        display: table-cell;
+}
+.pure-table tbody tr:nth-child(odd) {
+        background: none;
+}
+.pure-table tr:nth-child(even) {
+        background: transparent;
+}
+.pure-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+}
+.pure-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+}
+.pure-table tbody td {
+        display: block;
+        text-align: center;
+}
+}
+
+</style>
+<h1>Clients</h1>
+
+
+<form method="GET" action="{% url 'client_sort' %}">
+    <select name="dropdown">
+        <option selected="selected" disabled>Sort by:</option>
+        <option value="firstname">First Name</option>
+        <option value="lastname">Last Name</option>
+        <option value="registrationdate">Registration Date</option>
+    </select>
+    <input class="btn btn-primary a-btn-slide-text" type="submit" value="Ok" <span class="glyphicon glyphicon-ok" aria-hidden="true">
+</form>
+<button class="btn btn-success a-btn-slide-text" onclick="location.href='{% url "client_new" %}'" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span><strong>New Client</strong></span></button>
+
+
+<div class="table-wrapper">
+{#<table class="pure-table">#}
+<table id="table_id" class="pure-table">
+<thead>
+    <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Registration Date</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for client in object_list %}
+    <tr>
+    <td>{{ client.firstname }}</td>
+    <td>{{ client.lastname }}</td>
+    <td>{{ client.registrationdate }}</td>
+    <td><button class="btn btn-success a-btn-slide-text" onclick="location.href='{% url "client_view" client.pk %}'" type="button"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span><strong>view</strong></span></button></td>
+    <td><button class="btn btn-primary a-btn-slide-text" onclick="location.href='{% url "client_edit" client.pk %}'" type="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><span><strong>Edit</strong></span></button></td>
+    <td><button class="btn btn-danger a-btn-slide-text" onclick="location.href='{% url "client_delete" client.pk %}'" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span><strong>Delete</strong></span></button></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+    
+
+{% endblock %}

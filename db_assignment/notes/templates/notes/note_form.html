@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head><style>
+
+</style>
+</head>
+<body>
+<h1>Notes Edit</h1>
+
+<form class="pure-form" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+</body>
+
+{% endblock %}

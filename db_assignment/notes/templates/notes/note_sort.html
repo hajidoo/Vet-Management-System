@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Notes</h1>
+
+<form method="GET" action="{% url 'note_search' %}">
+<input name="q" value="{{ request.GET.q }}" placeholder="search">
+<button class="btn btn-success" type="submit">
+    Search
+</button>
+</form>
+
+<form method="GET" action="{% url 'note_sort' %}">
+    <select name="dropdown">
+        <option selected="selected" disabled>Sort by:</option>
+        <option value="date">date</option>
+        <option value="content">content</option>
+    </select>
+    <input type="submit" value="Ok">
+</form>
+
+<table class="pure-table">
+<thead>
+    <tr>
+    <th>Date</th>
+    <th>Content</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for note in object_list %}
+    <tr>
+    <td>{{ note.date }}</td>
+    <td>{{ note.content }}</td>
+    <td><button class="pure-button" onclick="location.href='{% url "note_view" note.pk %}'" type="button">view</button></td>
+    <td><button class="pure-button" onclick="location.href='{% url "note_edit" note.pk %}'" type="button">edit</button></td>
+    <td><button class="pure-button" onclick="location.href='{% url "note_delete" note.pk %}'" type="button">delete</button></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+    <button class="pure-button" onclick="location.href='{% url "note_new" %}'" type="button">New Note</button>
+
+{% endblock %}

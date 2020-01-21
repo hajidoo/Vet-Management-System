@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Diagnosis</h1>
+
+<form method="GET" action="{% url 'diagnosis_search' %}">
+<input name="q" value="{{ request.GET.q }}" placeholder="search">
+<button class="btn btn-success" type="submit">
+    Search
+</button>
+</form>
+
+<form method="GET" action="{% url 'diagnosis_sort' %}">
+    <select name="dropdown">
+        <option selected="selected" disabled>Sort by:</option>
+        <option value="code">code</option>
+        <option value="description">description</option>
+        <option value="status">status</option>
+        <option value="treatment">treatment</option>
+    </select>
+    <input type="submit" value="Ok">
+</form>
+
+<table class="pure-table">
+<thead>
+    <tr>
+    <th>Code</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Treatment</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for results in object_list %}
+    <tr>
+    <td>{{ results.code }}</td>
+    <td>{{ results.description }}</td>
+    <td>{{ results.status }}</td>
+    <td>{{ results.treatment }}</td>
+    <td><button class="pure-button" onclick="location.href='{% url "diagnosis_view" results.pk %}'" type="button">view</button></td>
+    <td><button class="pure-button" onclick="location.href='{% url "diagnosis_edit" results.pk %}'" type="button">edit</button></td>
+    <td><button class="pure-button" onclick="location.href='{% url "diagnosis_delete" results.pk %}'" type="button">delete</button></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

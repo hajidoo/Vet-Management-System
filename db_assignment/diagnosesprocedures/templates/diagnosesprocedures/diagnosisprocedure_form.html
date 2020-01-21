@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Procedure Edit</h1>
+{#dodaje procedure do diagnosis, edytuje wpis w DiagnosisMedicalProcedures!#}
+<form class="pure-form" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

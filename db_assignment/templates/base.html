@@ -1,0 +1,35 @@
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+<title>Vet System</title>
+<head><link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script></head>
+<!-- <style type="text/css">
+    .btn  {
+    position: absolute;
+    top: 50%;
+}
+</style> -->
+<body>
+	<br>
+<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"> -->
+    <!-- <a class="btn btn-success a-btn-slide-text" href="{% url "client_list"  %}">Clients</a> -->
+    <!-- <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"> -->
+        <!-- <span class="navbar-toggler-icon"></span> -->
+    <!-- </button> -->
+
+    <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
+        <!-- <div class="navbar-nav"> -->
+<a class="btn btn-success a-btn-slide-text" href="{% url "client_list"  %}">Clients</a>
+
+<a class="btn btn-success a-btn-slide-text" href="{% url "animal_list"  %}">Animals</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url "vet_list"  %}">Vets</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url "species_list"  %}">Species</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url "medication_list"  %}">Medications</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url "medicalprocedure_list"  %}">Medical Procedures</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url "appointment_list"  %}">Appointments</a>
+<a class="btn btn-success a-btn-slide-text" href="{% url 'login' %}">Logout</a>
+		
+</body>
+{% block content %}
+{% endblock %} 
